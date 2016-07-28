@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-strict-di>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <style>[ng-cloak] {visibility: hidden;}</style>
+    <script src="./jspm_packages/system.js"></script>
+    <script>System.config({baseURL: '.'});</script>
+    <script src="./config.js"></script>
+    <script src="./bundle.js"></script>
+    <script>
+        System.import('app/app.module').then(function (module) {
+            angular.bootstrap(document, [module.name]);
+        });
+    </script>
+</head>
+<body ng-cloak ng-controller="AppController as app">
+
+    <spsui-application mode="centered">
+
+        <spsui-page-nav
+            items="app.settings.navigation"
+            title="{{app.settings.title}}"></spsui-page-nav>
+
+        <spsui-viewport>
+            <ui-view>
+                <!-- Application routes will render in here -->
+            </ui-view>
+        </spsui-viewport>
+
+    </spsui-application>
+
+</body>
+</html>
