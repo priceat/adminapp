@@ -6,7 +6,9 @@ What is your app, who uses it, and where can it be accessed?
 
 ## Installation
 
-Any installation instructions?
+npm install
+then
+node_modules/jspm/jspm.js install
 
 ## Usage
 
