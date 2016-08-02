@@ -7,7 +7,7 @@
 
 module.exports = {
     "title": "Fulfillment Analytics",
-    "namespace": "fulfillment-analytics-admin",
+    "namespace": "fulfillment-analytics",
     "navigation": [],
     "routes": {
         "index": {
