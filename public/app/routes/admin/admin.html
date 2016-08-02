@@ -1,10 +1,54 @@
 
 <div class="row">
-
-    <h1>Admin</h1>
-
-    <h2>Hello {{ctrl.user.first_name}}</h2>
-
-    <p>Here's the admin app!</p>
-
+    <div class="tabbed">
+        <ul class="tabs" data-tab>
+            <li class="tab-title active" id="companies"><a ng-click="ctrl.setCompanyActive()" href="#companies-tab">Companies</a></li>
+            <li class="tab-title" id="dataflow"><a ng-click="ctrl.setDataflowActive()" href="#dataflow-tab">Data Flow</a></li>
+        </ul>
+        <div class="panel tabs-content" style="padding-bottom: 1px; padding-top: 10px">
+            <div class="large-16 content active row" id="companies-tab">
+                <div class="small-5 column row">
+                        <input type="text" size="50" placeholder="Search for a customer by company name"/>
+                </div>
+                <div class="small-1 row column" style="float:left;">
+                    <button><i class="fa fa-search"></i></button>
+                </div>
+                <div class="small-2 column">
+                    <p>
+                        <small>
+                            <a href="">Advanced Search</a>
+                        </small>
+                    </p>
+                </div>
+                <div class="large-3 row" style="float: right;">
+                    <button class="confirm">Add New Customer</button>
+                </div>
+            </div>
+            <div class="large-16 content row" id="dataflow-tab">
+                <div class="large-6 column row">
+                    <i class="fa fa-search fa-lg lightgrey" style="padding-right: 5px"></i><small><a  href="">Advanced Search</a></small>
+                </div>
+                <div class="large-3 row" style="float: right;">
+                    <button class="confirm">Add Documents</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="panel">
+        <div ng-show="ctrl.companyActive" id="company-results" class="ng-hide" style="width: 50%; margin: 0 auto; text-align: center;">
+            <img src="../../../images/search-company.png" height="97" width="161" />
+            <br/>
+            <br/>
+            <h2>Search for a Company</h2>
+            <div class="lightgrey">Use the search options above to locate records for a given company.</div>
+        </div>
+        <div ng-show="ctrl.dataflowActive" id="dataflow-results" class="ng-hide" style="width: 50%; margin: 0 auto; text-align: center;">
+            <img src="../../../images/icon-records@1x.png"/>
+            <br/>
+            <br/>
+            <h2>Search for Company Records</h2>
+            <div class="lightgrey">Use the search options above to locate records for a given company.</div>
+        </div>
+    </div>
 </div>
