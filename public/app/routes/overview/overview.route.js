@@ -1,6 +1,6 @@
 import {Route} from 'app/modules/router/route';
-import {Controller} from './dashboard.ctrl';
-import template from './dashboard.html!text';
+import {Controller} from './overview.ctrl';
+import template from './overview.html!text';
 
 // If your route has any Angular module dependencies,
 // import them into this file and list them out in
@@ -12,7 +12,7 @@ var ngRouteDependencies = [];
 // passed here are used to define a ui-router state.
 
 export let route = new Route({
-    name: 'dashboard',
+    name: 'overview',
     template: template,
     controller: Controller,
     controllerAs: 'ctrl'

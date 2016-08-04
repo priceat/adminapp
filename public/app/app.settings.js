@@ -16,13 +16,13 @@ module.exports = {
             "src": "app/routes/index.route",
             "redirect": "admin"
         },
-        "dashboard": {
+        "overview": {
             "nav": true,
-            "name": "dashboard",
-            "title": "Dashboard",
-            "full": "/dashboard/",
-            "slug": "/dashboard/",
-            "src": "app/routes/dashboard/dashboard.route"
+            "name": "overview",
+            "title": "Overview",
+            "full": "/overview/",
+            "slug": "/overview/",
+            "src": "app/routes/overview/overview.route"
         },
         "visibility": {
             "nav": true,
@@ -47,14 +47,6 @@ module.exports = {
             "full": "/compliance/",
             "slug": "/compliance/",
             "src": "app/routes/compliance/compliance.route"
-        },
-        "preferences": {
-            "nav": true,
-            "name": "preferences",
-            "title": "Preferences",
-            "full": "/preferences/",
-            "slug": "/preferences/",
-            "src": "app/routes/preferences/preferences.route"
         },
         "admin": {
             "nav": true,

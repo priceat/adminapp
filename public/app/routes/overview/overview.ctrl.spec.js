@@ -1,4 +1,4 @@
-import {Controller} from './dashboard.ctrl';
+import {Controller} from './overview.ctrl';
 import currentUserMock from 'webui-core/modules/currentUser/currentUser.mock';
 
 describe('overview.ctrl', () => {
