@@ -9,6 +9,9 @@
     <script>System.config({baseURL: '.'});</script>
     <script src="./config.js"></script>
     <script src="./bundle.js"></script>
+    <script src="./bundles/jquery.min.js"></script>
+    <script src="./bundles/lodash.min.js"></script>
+    <script src="./bundles/webui/webui.min.js"></script>
     <script>
         System.import('app/app.module').then(function (module) {
             angular.bootstrap(document, [module.name]);
