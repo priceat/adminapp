@@ -8,16 +8,31 @@
         <div class="panel tabs-content" style="padding-bottom: 1px; padding-top: 10px">
             <div class="large-16 content active row" id="companies-tab">
                 <div class="small-5 column row">
-                        <input type="text" size="50" placeholder="Search for a customer by company name"/>
+                    <input type="text" size="50" ng-model="search.$" placeholder="Search for a customer by company name"/>
                 </div>
                 <div class="small-1 row column" style="float:left;">
-                    <button><i class="fa fa-search"></i></button>
+                    <button ><i class="fa fa-search" ng-click="ctrl.displaySearchResults()"></i></button>
                 </div>
                 <div class="small-2 column">
                     <p>
-                        <small>
-                            <a href="">Advanced Search</a>
-                        </small>
+                        <!--<small>-->
+                            <a ng-click="ctrl.toggles = !ctrl.toggles">Advanced Search</a>
+                            <ul ng-show="ctrl.toggles">
+                                <li ng-repeat="item in ctrl.supplierData">
+                                <input type="checkbox" value="{{item}}" ng-model="data.name" />{{item.name}}
+                                    </li>
+                                <li ng-repeat="item in ctrl.products">
+                                <input type="checkbox" value="{{item}}" ng-model="data.name" />{{item.name}}
+                                    </li>
+                                    <li ng-repeat="item in ctrl.login">
+                                <input type="checkbox" value="{{item}}" ng-model="data.name" />{{item.name}}
+                                        </li>
+                                   <div class="small-1 row column" style="float:left;">
+                                       <button ><i class="fa fa-search" ng-click="ctrl.displaySearchResults()"></i></button>
+                                       </div>
+                            </ul>
+
+                            </div>
                     </p>
                 </div>
                 <div class="large-3 row" style="float: right;">
@@ -25,9 +40,9 @@
                 </div>
             </div>
             <div class="large-16 content row" id="dataflow-tab">
-                <div class="large-6 column row">
-                    <i class="fa fa-search fa-lg lightgrey" style="padding-right: 5px"></i><small><a  href="">Advanced Search</a></small>
-                </div>
+                <!--<div class="large-6 column row">-->
+                    <!--<i class="fa fa-search fa-lg lightgrey" style="padding-right: 5px"></i><small><a  href="">Advanced Search</a></small>-->
+                <!--</div>-->
                 <div class="large-3 row" style="float: right;">
                     <button class="confirm">Add Documents</button>
                 </div>
@@ -37,6 +52,41 @@
     <br/>
     <div class="panel">
         <div ng-show="ctrl.companyActive" id="company-results" class="ng-hide" style="width: 50%; margin: 0 auto; text-align: center;">
+
+            <table class = "table" width="100%">
+                <thead>
+                <tr>
+                    <th class>Company Name</th>
+                    <th class>Organization Type</th>
+                    <th class>Products</th>
+                    <th class>Active Users</th>
+                    <th class>Last Login</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ul ng-show="ctrl.searchDirty" ng-repeat="company in ctrl.companies">
+                    <span><p>Hello world {{ctrl.searchDirty}}</p></span>
+                    <ul data-ng-repeat="data in company | filter:search:data.name">
+                        <li>{{data.companyName}}</li>
+                    <!--<li>{{data.retailerOrSupplier}}</li>-->
+                    <!--<li>{{data.capabilities}}</li>-->
+                    <!--<li>{{data.activeUsers}}</li>-->
+                    </tr>
+                </ul>
+                <!--<ul  ng-repeat="company in ctrl.companies">-->
+                    <!--<span><p>Helo world {{ctrl.searchDirty}}</p></span>-->
+                    <!--<ul ng-repeat="data in company | filter:data.name">-->
+                        <!--<li>{{data.companyName}}</li>-->
+                        <!--&lt;!&ndash;<li>{{data.retailerOrSupplier}}</li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li>{{data.capabilities}}</li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li>{{data.activeUsers}}</li>&ndash;&gt;-->
+                    <!--</ul>-->
+                <!--</ul>-->
+
+                </tbody>
+
+            </table>
+
             <img src="../../../images/search-company.png" height="97" width="161" />
             <br/>
             <br/>
