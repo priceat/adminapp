@@ -17,33 +17,28 @@
                     <a ng-click="ctrl.toggles = !ctrl.toggles">Advanced Search</a>
                     <!--<div class="large-16 row column">-->
                             <div ng-show="ctrl.toggles" >
-                                   <!--<div class="small-1 row column" style="float:right; position: relative">-->
-                                       <!--<button class="confirm" type="submit">Search</button>-->
-                                       <!--</div>-->
                                 </div>
-                            <!--</div>-->
+
                             </div>
                 <div class="large-3 column">
                     <button class="confirm" style="float: right;">Add New Customer</button>
                 </div>
             </form>
-            <div class="arrow-up"></div>
-            <style>
+            <div ng-show="ctrl.toggles" >
+                <div class="arrow-up" ></div>
+            </div>
 
-
-
-            </style>
 
             <form ng-submit="ctrl.applyFilter()" ng-show="ctrl.toggles" id="advanced-search-form">
                 <div class="checkboxes">
                     <!--<input type="text" size="50" class="search" ng-model="ctrl.filterModel.companyName" placeholder="Search for a customer by company name"/>-->
                     <div class="section-1">
-                        <h4>section-1</h4>
+                        <h4>Organization Type</h4>
                         <label><input type="checkbox" ng-model="ctrl.filterModel.retailerSelected"  ng-true-value="1" ng-false-value="0"/> Retailer</label>
                         <label><input type="checkbox" ng-model="ctrl.filterModel.supplierSelected"   ng-true-value="1" ng-false-value="0"/> Supplier</label>
                     </div>
                     <div class="section-2">
-                        <h4>section-2</h4>
+                        <h4>Products</h4>
                         <label><input type="checkbox" ng-model="ctrl.filterModel.visibility"   ng-true-value="1" ng-false-value="0"/> Visibility</label>
                         <label><input type="checkbox" ng-model="ctrl.filterModel.orderPerf"   ng-true-value="1" ng-false-value="0"/> Order Performance</label>
                         <label><input type="checkbox" ng-model="ctrl.filterModel.compliance"   ng-true-value="1" ng-false-value="0"/> Compliance</label>
@@ -125,31 +120,30 @@
         <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
     <!--</div>-->
 <!--</script>-->
-<div ng-init="ctrl.showData()">
-    {{ctrl.companies}}
-<ul>
-    <li class="paginationclass" style="font-weight:bold;"><span>Name</span><span>Age</span><span>Designation</span></li>
-    <li class="paginationclass" ng-repeat="company in ctrl.companies | pagination:ctrl.curPage * ctrl.pageSize | limitTo: ctrl.pageSize">
-        <!--<tr ng-repeat="company in ctrl.companies | searchCompanies:ctrl.appliedTextSearch:ctrl.appliedAdvancedFilters" >-->
+<!--<div ng-init="ctrl.showData()">-->
+<!--<ul>-->
+    <!--<li class="paginationclass" style="font-weight:bold;"><span>Name</span><span>Age</span><span>Designation</span></li>-->
+    <!--<li class="paginationclass" ng-repeat="company in ctrl.companies | pagination:ctrl.curPage * ctrl.pageSize | limitTo: ctrl.pageSize">-->
+        <!--&lt;!&ndash;<tr ng-repeat="company in ctrl.companies | searchCompanies:ctrl.appliedTextSearch:ctrl.appliedAdvancedFilters" >&ndash;&gt;-->
 
-        <div><span>{{ datalist.name }} </span><span>{{ datalist.age }}</span><span>{{ datalist.designation }}</span></div>
-    </li>
-</ul>
+        <!--<div><span>{{ datalist.name }} </span><span>{{ datalist.age }}</span><span>{{ datalist.designation }}</span></div>-->
+    <!--</li>-->
+<!--</ul>-->
 
-<div class="pagination pagination-centered" ng-show="ctrl.datalists.length">
-    <ul class="pagination-controle pagination">
-        <li>
-            <button type="button" class="btn btn-primary" ng-disabled="ctrl.curPage == 0"
-                    ng-click="ctrl.curPage=ctrl.curPage-1"> &lt; PREV</button>
-        </li>
-        <li>
-            <span>Page {{ctrl.curPage + 1}} of {{ ctrl.numberOfPages() }}</span>
-        </li>
-        <li>
-            <button type="button" class="btn btn-primary"
-                    ng-disabled="curPage >= ctrl.datalists.length/pageSize - 1"
-                    ng-click="ctrl.curPage = ctrl.curPage+1">NEXT &gt;</button>
-        </li>
-    </ul>
-</div>
+<!--<div class="pagination pagination-centered" ng-show="ctrl.datalists.length">-->
+    <!--<ul class="pagination-controle pagination">-->
+        <!--<li>-->
+            <!--<button type="button" class="btn btn-primary" ng-disabled="ctrl.curPage == 0"-->
+                    <!--ng-click="ctrl.curPage=ctrl.curPage-1"> &lt; PREV</button>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<span>Page {{ctrl.curPage + 1}} of {{ ctrl.numberOfPages() }}</span>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<button type="button" class="btn btn-primary"-->
+                    <!--ng-disabled="curPage >= ctrl.datalists.length/pageSize - 1"-->
+                    <!--ng-click="ctrl.curPage = ctrl.curPage+1">NEXT &gt;</button>-->
+        <!--</li>-->
+    <!--</ul>-->
+<!--</div>-->
     </div>
