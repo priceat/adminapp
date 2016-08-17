@@ -5,88 +5,92 @@
             <li class="tab-title active" id="companies"><a ng-click="ctrl.setCompanyActive()" href="#companies-tab">Companies</a></li>
             <li class="tab-title" id="dataflow"><a ng-click="ctrl.setDataflowActive()" href="#dataflow-tab">Data Flow</a></li>
         </ul>
-        <div class="panel tabs-content" style="padding-bottom: 1px; padding-top: 10px">
-            <div class="large-16 content active row" id="companies-tab">
+        <div class="panel tabs-content">
+            <form class="large-16 content active row" id="companies-tab" ng-submit="ctrl.applyFilter()">
                 <div class="small-5 column row">
-                    <input type="text" size="50" ng-model="search.$" placeholder="Search for a customer by company name"/>
+                    <input type="text" size="50" class="search" ng-model="ctrl.filterModel.companyName" placeholder="Search for a customer by company name"/>
                 </div>
                 <div class="small-1 row column" style="float:left;">
-                    <button ><i class="fa fa-search" ng-click="ctrl.displaySearchResults()"></i></button>
+                    <button type="submit" ><i class="fa fa-search"></i></button>
                 </div>
                 <div class="small-2 column">
-                    <p>
-                        <!--<small>-->
-                            <a ng-click="ctrl.toggles = !ctrl.toggles">Advanced Search</a>
-                            <ul ng-show="ctrl.toggles">
-                                <li ng-repeat="item in ctrl.supplierData">
-                                <input type="checkbox" value="{{item}}" ng-model="data.name" />{{item.name}}
-                                    </li>
-                                <li ng-repeat="item in ctrl.products">
-                                <input type="checkbox" value="{{item}}" ng-model="data.name" />{{item.name}}
-                                    </li>
-                                    <li ng-repeat="item in ctrl.login">
-                                <input type="checkbox" value="{{item}}" ng-model="data.name" />{{item.name}}
-                                        </li>
-                                   <div class="small-1 row column" style="float:left;">
-                                       <button ><i class="fa fa-search" ng-click="ctrl.displaySearchResults()"></i></button>
-                                       </div>
-                            </ul>
-
+                    <a ng-click="ctrl.toggles = !ctrl.toggles">Advanced Search</a>
+                    <!--<div class="large-16 row column">-->
+                            <div ng-show="ctrl.toggles" >
+                                   <!--<div class="small-1 row column" style="float:right; position: relative">-->
+                                       <!--<button class="confirm" type="submit">Search</button>-->
+                                       <!--</div>-->
+                                </div>
+                            <!--</div>-->
                             </div>
-                    </p>
+                <div class="large-3 column">
+                    <button class="confirm" style="float: right;">Add New Customer</button>
                 </div>
-                <div class="large-3 row" style="float: right;">
-                    <button class="confirm">Add New Customer</button>
+            </form>
+            <div class="arrow-up"></div>
+            <style>
+
+
+
+            </style>
+
+            <form ng-submit="ctrl.applyFilter()" ng-show="ctrl.toggles" id="advanced-search-form">
+                <div class="checkboxes">
+                    <!--<input type="text" size="50" class="search" ng-model="ctrl.filterModel.companyName" placeholder="Search for a customer by company name"/>-->
+                    <div class="section-1">
+                        <h4>section-1</h4>
+                        <label><input type="checkbox" ng-model="ctrl.filterModel.retailerSelected"  ng-true-value="1" ng-false-value="0"/> Retailer</label>
+                        <label><input type="checkbox" ng-model="ctrl.filterModel.supplierSelected"   ng-true-value="1" ng-false-value="0"/> Supplier</label>
+                    </div>
+                    <div class="section-2">
+                        <h4>section-2</h4>
+                        <label><input type="checkbox" ng-model="ctrl.filterModel.visibility"   ng-true-value="1" ng-false-value="0"/> Visibility</label>
+                        <label><input type="checkbox" ng-model="ctrl.filterModel.orderPerf"   ng-true-value="1" ng-false-value="0"/> Order Performance</label>
+                        <label><input type="checkbox" ng-model="ctrl.filterModel.compliance"   ng-true-value="1" ng-false-value="0"/> Compliance</label>
+                        <label><input type="checkbox" ng-model="ctrl.filterModel.pos"   ng-true-value="1" ng-false-value="0"/> Point of Sale</label>
+                    </div>
                 </div>
-            </div>
-            <div class="large-16 content row" id="dataflow-tab">
-                <!--<div class="large-6 column row">-->
-                    <!--<i class="fa fa-search fa-lg lightgrey" style="padding-right: 5px"></i><small><a  href="">Advanced Search</a></small>-->
+                <button class="confirm" type="submit">Search</button>
+            </form>
+            {{ctrl.filterModel}}
+            {{ctrl.theFilter}}
+
+
+            <!--<div class="large-16 content row" id="dataflow-tab">-->
+                <!--<div class="large-3 row" style="float: right;">-->
+                    <!--<button class="confirm">Add Documents</button>-->
                 <!--</div>-->
-                <div class="large-3 row" style="float: right;">
-                    <button class="confirm">Add Documents</button>
-                </div>
             </div>
         </div>
     </div>
     <br/>
-    <div class="panel">
-        <div ng-show="ctrl.companyActive" id="company-results" class="ng-hide" style="width: 50%; margin: 0 auto; text-align: center;">
+    <div class="panel" ng-init="showData()">
+        <div ng-show="ctrl.companyActive" id="company-results" class="ng-hide" style="width: 100%; margin: 0 auto; text-align: center;">
 
-            <table class = "table" width="100%">
-                <thead>
+            <table class = "table" width="100%" ng-show="ctrl.searchDirty">
+                <thead ng-cloak>
                 <tr>
                     <th class>Company Name</th>
                     <th class>Organization Type</th>
                     <th class>Products</th>
                     <th class>Active Users</th>
-                    <th class>Last Login</th>
                 </tr>
                 </thead>
+
+
                 <tbody>
-                <ul ng-show="ctrl.searchDirty" ng-repeat="company in ctrl.companies">
-                    <span><p>Hello world {{ctrl.searchDirty}}</p></span>
-                    <ul data-ng-repeat="data in company | filter:search:data.name">
-                        <li>{{data.companyName}}</li>
-                    <!--<li>{{data.retailerOrSupplier}}</li>-->
-                    <!--<li>{{data.capabilities}}</li>-->
-                    <!--<li>{{data.activeUsers}}</li>-->
-                    </tr>
-                </ul>
-                <!--<ul  ng-repeat="company in ctrl.companies">-->
-                    <!--<span><p>Helo world {{ctrl.searchDirty}}</p></span>-->
-                    <!--<ul ng-repeat="data in company | filter:data.name">-->
-                        <!--<li>{{data.companyName}}</li>-->
-                        <!--&lt;!&ndash;<li>{{data.retailerOrSupplier}}</li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li>{{data.capabilities}}</li>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<li>{{data.activeUsers}}</li>&ndash;&gt;-->
-                    <!--</ul>-->
-                <!--</ul>-->
-
+                <!--<tr ng-repeat="company in ctrl.companies | searchCompanies:ctrl.appliedTextSearch:ctrl.appliedAdvancedFilters" >-->
+                <!--<tr ng-repeat="company in ctrl.companies | filter:{companyName: ctrl.theFilter.companyName, visibility: ctrl.theFilter.visibility, retailerOrSupplier: ctrl.theFilter.retailerOrSupplier, orderPerf : ctrl.theFilter.orderPerf, compliance : ctrl.theFilter.compliance, pos : ctrl.theFilter.pos, summary : ctrl.theFilter.summary} | limitTo: 10" >-->
+                <!--<tr ng-repeat="company in ctrl.companies | filter:{companyName: ctrl.theFilter.companyName, retailerOrSupplier: ctrl.theFilter.retailerOrSupplier, summary : ctrl.theFilter.summary} | pagination:ctrl.curPage * ctrl.pageSize | limitTo: ctrl.pageSize" >-->
+                <tr ng-repeat="company in ctrl.companies | filter:{companyName: ctrl.theFilter.companyName, retailerOrSupplier: ctrl.theFilter.retailerOrSupplier, summary : ctrl.theFilter.summary}    " >
+                    <td>{{company.companyName}}</td>
+                    <td style="text-transform: capitalize">{{company.retailerOrSupplier}}</td>
+                    <td>{{company.summary}}</td>
+                    <td>{{company.activeUsers}}</td>
+                </tr>
                 </tbody>
-
             </table>
-
+            <div ng-show="ctrl.showImage">
             <img src="../../../images/search-company.png" height="97" width="161" />
             <br/>
             <br/>
@@ -100,5 +104,52 @@
             <h2>Search for Company Records</h2>
             <div class="lightgrey">Use the search options above to locate records for a given company.</div>
         </div>
+        </div>
     </div>
 </div>
+
+<!--<script type="text/ng-template" id="myModalContent.html">-->
+    <!--<div class="modal-header">-->
+        <!--<h3 class="modal-title">I'm a modal!</h3>-->
+    <!--</div>-->
+    <!--<div class="modal-body">-->
+        <!--<ul>-->
+            <!--<li ng-repeat="item in items">-->
+                <!--<a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>-->
+            <!--</li>-->
+        <!--</ul>-->
+        <!--Selected: <b>{{ selected.item }}</b>-->
+    <!--</div>-->
+    <!--<div class="modal-footer">-->
+        <!--<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>-->
+        <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
+    <!--</div>-->
+<!--</script>-->
+<div ng-init="ctrl.showData()">
+    {{ctrl.companies}}
+<ul>
+    <li class="paginationclass" style="font-weight:bold;"><span>Name</span><span>Age</span><span>Designation</span></li>
+    <li class="paginationclass" ng-repeat="company in ctrl.companies | pagination:ctrl.curPage * ctrl.pageSize | limitTo: ctrl.pageSize">
+        <!--<tr ng-repeat="company in ctrl.companies | searchCompanies:ctrl.appliedTextSearch:ctrl.appliedAdvancedFilters" >-->
+
+        <div><span>{{ datalist.name }} </span><span>{{ datalist.age }}</span><span>{{ datalist.designation }}</span></div>
+    </li>
+</ul>
+
+<div class="pagination pagination-centered" ng-show="ctrl.datalists.length">
+    <ul class="pagination-controle pagination">
+        <li>
+            <button type="button" class="btn btn-primary" ng-disabled="ctrl.curPage == 0"
+                    ng-click="ctrl.curPage=ctrl.curPage-1"> &lt; PREV</button>
+        </li>
+        <li>
+            <span>Page {{ctrl.curPage + 1}} of {{ ctrl.numberOfPages() }}</span>
+        </li>
+        <li>
+            <button type="button" class="btn btn-primary"
+                    ng-disabled="curPage >= ctrl.datalists.length/pageSize - 1"
+                    ng-click="ctrl.curPage = ctrl.curPage+1">NEXT &gt;</button>
+        </li>
+    </ul>
+</div>
+    </div>
